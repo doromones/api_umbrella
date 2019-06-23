@@ -1,19 +1,16 @@
 defmodule Core.AccountsTest do
   use Core.DataCase
+  import Core.Factory
 
   alias Core.Accounts
 
   describe "users" do
     alias Core.Accounts.User
 
-    @valid_attrs %{email: "some email"}
-    @update_attrs %{email: "some updated email"}
-    @invalid_attrs %{email: nil}
-
     def user_fixture(attrs \\ %{}) do
       {:ok, user} =
         attrs
-        |> Enum.into(@valid_attrs)
+        |> Enum.into(params_for(:user))
         |> Accounts.create_user()
 
       user
@@ -30,23 +27,25 @@ defmodule Core.AccountsTest do
     end
 
     test "create_user/1 with valid data creates a user" do
-      assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      assert user.email == "some email"
+      params = params_for(:user)
+      assert {:ok, %User{} = user} = Accounts.create_user(params)
+      assert user.email == params.email
     end
 
     test "create_user/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Accounts.create_user(@invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_user(params_for(:user_bad))
     end
 
     test "update_user/2 with valid data updates the user" do
       user = user_fixture()
-      assert {:ok, %User{} = user} = Accounts.update_user(user, @update_attrs)
-      assert user.email == "some updated email"
+      update_attributes = params_for(:user)
+      assert {:ok, %User{} = user} = Accounts.update_user(user, update_attributes)
+      assert user.email == update_attributes.email
     end
 
     test "update_user/2 with invalid data returns error changeset" do
       user = user_fixture()
-      assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user, @invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user, params_for(:user_bad))
       assert user == Accounts.get_user!(user.id)
     end
 
