@@ -11,6 +11,11 @@ defmodule ApiWeb.UserView do
   end
 
   def render("user.json", %{user: user}) do
-    %{id: user.id}
+    %{
+      id: user.id,
+      email: user.email,
+      inserted_at: user.inserted_at,
+      updated_at: user.updated_at
+    }
   end
 end
