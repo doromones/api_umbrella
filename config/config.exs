@@ -20,6 +20,10 @@ config :api_web, ApiWeb.Endpoint,
   render_errors: [view: ApiWeb.ErrorView, accepts: ~w(json)],
   pubsub: [name: ApiWeb.PubSub, adapter: Phoenix.PubSub.PG2]
 
+config :api_web, ApiWeb.Guardian,
+       issuer: :api_web,
+       secret_key: Mix.env()
+
 # Configure Mix tasks and generators
 config :core,
   ecto_repos: [Core.Repo]
