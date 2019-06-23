@@ -25,5 +25,8 @@
     <orderEntry type="library" name="benchee_json" level="project" />
     <orderEntry type="library" name="decimal" level="project" />
     <orderEntry type="library" name="connection" level="project" />
+    <orderEntry type="library" name="ex_machina" level="project" />
+    <orderEntry type="library" name="earmark" level="project" />
+    <orderEntry type="library" name="ecto" level="project" />
   </component>
 </module>

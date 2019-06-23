@@ -33,6 +33,7 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/decimal" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/ecto" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/ecto_sql" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/ex_machina" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/gettext" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/jason" />
       <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/mime" />
