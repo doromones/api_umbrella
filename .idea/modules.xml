@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$//api_umbrella.iml" filepath="$PROJECT_DIR$//api_umbrella.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apps/api_web/api_web.iml" filepath="$PROJECT_DIR$/apps/api_web/api_web.iml" />
       <module fileurl="file://$PROJECT_DIR$/apps/core//core.iml" filepath="$PROJECT_DIR$/apps/core//core.iml" />
       <module fileurl="file://$PROJECT_DIR$/apps/core_web//core_web.iml" filepath="$PROJECT_DIR$/apps/core_web//core_web.iml" />
     </modules>
