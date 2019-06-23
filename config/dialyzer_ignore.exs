@@ -1,3 +1,3 @@
 [
-  {"lib/phoenix/router.ex", :nowarn_function, 2}
+  {"lib/phoenix/router.ex", :no_return, 2}
 ]
