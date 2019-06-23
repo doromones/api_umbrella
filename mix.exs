@@ -13,7 +13,8 @@ defmodule Core.Umbrella.MixProject do
       ],
       test_coverage: [tool: ExCoveralls],
       dialyzer: [
-        plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
+        plt_add_deps: :transitive,
+        ignore_warnings: "config/dialyzer_ignore.exs"
       ]
     ]
   end
