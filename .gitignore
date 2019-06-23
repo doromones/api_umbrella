@@ -20,3 +20,6 @@ erl_crash.dump
 *.ez
 
 .elixir_ls/
+
+/priv/plts/*.plt
+/priv/plts/*.plt.hash

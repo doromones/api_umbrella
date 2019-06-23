@@ -12,6 +12,9 @@ defmodule Core.Umbrella.MixProject do
         "coveralls.json": :test,
       ],
       test_coverage: [tool: ExCoveralls],
+      dialyzer: [
+        plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
+      ]
     ]
   end
 
@@ -30,7 +33,8 @@ defmodule Core.Umbrella.MixProject do
   defp deps do
     [
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.5.7", only: :test}
+      {:excoveralls, "~> 0.5.7", only: :test},
+      {:dialyxir, "~> 0.5", only: [:dev], runtime: false}
     ]
   end
 end
