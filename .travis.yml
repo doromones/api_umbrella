@@ -10,7 +10,8 @@ script:
 
 cache:
   directories:
-    - priv/plts
+    - _build
+    - deps
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
