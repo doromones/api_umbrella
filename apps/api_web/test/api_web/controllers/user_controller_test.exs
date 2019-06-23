@@ -1,21 +1,8 @@
 defmodule ApiWeb.UserControllerTest do
   use ApiWeb.ConnCase
+  import Core.Factory
 
-  alias Core.Accounts
   alias Core.Accounts.User
-
-  @create_attrs %{
-
-  }
-  @update_attrs %{
-
-  }
-  @invalid_attrs %{}
-
-  def fixture(:user) do
-    {:ok, user} = Accounts.create_user(@create_attrs)
-    user
-  end
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -30,7 +17,7 @@ defmodule ApiWeb.UserControllerTest do
 
   describe "create user" do
     test "renders user when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.user_path(conn, :create), user: @create_attrs)
+      conn = post(conn, Routes.user_path(conn, :create), user: params_for(:user))
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
       conn = get(conn, Routes.user_path(conn, :show, id))
@@ -41,7 +28,7 @@ defmodule ApiWeb.UserControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, Routes.user_path(conn, :create), user: @invalid_attrs)
+      conn = post(conn, Routes.user_path(conn, :create), user: params_for(:user_bad))
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -50,7 +37,7 @@ defmodule ApiWeb.UserControllerTest do
     setup [:create_user]
 
     test "renders user when data is valid", %{conn: conn, user: %User{id: id} = user} do
-      conn = put(conn, Routes.user_path(conn, :update, user), user: @update_attrs)
+      conn = put(conn, Routes.user_path(conn, :update, user), user: params_for(:user))
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
       conn = get(conn, Routes.user_path(conn, :show, id))
@@ -61,7 +48,7 @@ defmodule ApiWeb.UserControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, user: user} do
-      conn = put(conn, Routes.user_path(conn, :update, user), user: @invalid_attrs)
+      conn = put(conn, Routes.user_path(conn, :update, user), user: params_for(:user_bad))
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -80,7 +67,6 @@ defmodule ApiWeb.UserControllerTest do
   end
 
   defp create_user(_) do
-    user = fixture(:user)
-    {:ok, user: user}
+    {:ok, user: insert(:user)}
   end
 end
