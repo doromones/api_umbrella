@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="file://$PROJECT_DIR$/_build/dev/consolidated" />
       <root url="file://$PROJECT_DIR$/_build/test/consolidated" />
+      <root url="file://$PROJECT_DIR$/_build/dev/lib/base64url/ebin" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
