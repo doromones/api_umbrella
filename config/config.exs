@@ -10,8 +10,8 @@
 use Mix.Config
 
 config :api_web,
-  ecto_repos: [ApiWeb.Repo],
-  generators: [context_app: false]
+  ecto_repos: [Core.Repo],
+  generators: [context_app: :core]
 
 # Configures the endpoint
 config :api_web, ApiWeb.Endpoint,
