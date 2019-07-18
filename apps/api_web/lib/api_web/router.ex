@@ -9,5 +9,8 @@ defmodule ApiWeb.Router do
     pipe_through :api
 
     resources "/users", UserController, except: [:new, :edit]
+
+    # Auth
+    post("/auth/registrations", Auth.RegistrationController, :create)
   end
 end

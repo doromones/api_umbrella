@@ -4,7 +4,7 @@ defmodule Core.UserFactory do
 
       def user_factory do
         %Core.Accounts.User{
-          email: sequence(:email, &"email-#{&1}@example.com"),
+          email: sequence(:email, &"email-#{&1}@example.com")
         }
       end
 
@@ -13,7 +13,6 @@ defmodule Core.UserFactory do
           email: ""
         }
       end
-
     end
   end
 end
