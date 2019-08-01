@@ -9,6 +9,15 @@
 # move said applications out of the umbrella.
 use Mix.Config
 
+config :ueberauth, Ueberauth,
+       providers: [
+         facebook: {Ueberauth.Strategy.Facebook, []}
+       ]
+
+config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+       client_id: System.get_env("FACEBOOK_CLIENT_ID"),
+       client_secret: System.get_env("FACEBOOK_CLIENT_SECRET")
+
 config :api_web,
   ecto_repos: [Core.Repo],
   generators: [context_app: :core]
@@ -50,3 +59,7 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+
+if File.regular?("config/#{Mix.env()}.local.exs") do
+  import_config("#{Mix.env()}.local.exs")
+end

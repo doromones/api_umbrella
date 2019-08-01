@@ -10,7 +10,12 @@ defmodule ApiWeb.Router do
 
     resources "/users", UserController, except: [:new, :edit]
 
-    # Auth
-    post("/auth/registrations", Auth.RegistrationController, :create)
+    scope "/auth", Auth do
+
+      post "/registrations", RegistrationController, :create
+
+      get "/:provider", OAuthController, :request
+      get "/:provider/callback", OAuthController, :callback
+    end
   end
 end
