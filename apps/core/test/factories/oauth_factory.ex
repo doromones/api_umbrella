@@ -19,7 +19,7 @@ defmodule Core.OAuthFactory do
             first_name: sequence(:first_name, &"first_name-#{&1}"),
             last_name: sequence(:last_name, &"last_name-#{&1}")
           },
-          provider: :facebook,
+          provider: "facebook",
           strategy: Ueberauth.Strategy.Facebook,
           uid: sequence(:uid, &"111111111#{&1}")
         }
