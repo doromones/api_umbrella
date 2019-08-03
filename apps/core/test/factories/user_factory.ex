@@ -7,6 +7,9 @@ defmodule Core.UserFactory do
           email: sequence(:email, &"email-#{&1}@example.com"),
           provider: "facebook",
           uid: sequence(:email, &"1111111111111111#{&1}"),
+          name: sequence(:name, &"name-#{&1}"),
+          nickname: sequence(:nickname, &"nickname-#{&1}"),
+          image: sequence(:image, &"image-#{&1}"),
         }
       end
 

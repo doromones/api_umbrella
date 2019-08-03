@@ -11,7 +11,7 @@ defmodule ApiWeb.Auth.OAuthControllerTest do
 
   describe "create user" do
     test "renders user when data is valid", %{conn: conn} do
-      facebook_auth = params_for(:oauth_facebook)
+      facebook_auth = build(:oauth_facebook)
       conn = conn
              |> assign(:ueberauth_auth, facebook_auth)
              |> get("/auth/facebook/callback")
@@ -24,7 +24,7 @@ defmodule ApiWeb.Auth.OAuthControllerTest do
       user = insert(:user)
 
       facebook_auth =
-        params_for(:oauth_facebook)
+        build(:oauth_facebook)
         |> put_in([:info, :email], user.email)
         |> put_in([:provider], user.provider)
         |> put_in([:uid], user.uid)
@@ -35,8 +35,6 @@ defmodule ApiWeb.Auth.OAuthControllerTest do
         |> get("/auth/facebook/callback")
 
       response_body = json_response(conn, 201)
-      IO.inspect(response_body)
-      IO.inspect(user)
       assert response_body["errors"] == nil
       assert %{"id" => id} = response_body["data"]
     end
