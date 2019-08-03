@@ -6,7 +6,9 @@ defmodule ApiWeb.Auth.OAuthController do
   alias Core.Accounts.User
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    IO.inspect auth
+    auth
+    |> inspect(pretty: true)
+    |> :logger.debug
 
     user_params = %{
       token: auth.credentials.token,

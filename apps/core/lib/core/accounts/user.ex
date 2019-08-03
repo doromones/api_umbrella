@@ -4,6 +4,12 @@ defmodule Core.Accounts.User do
 
   schema "users" do
     field :email, :string
+    field :provider, :string
+    field :uid, :string
+    field :token, :string
+    field :name, :string
+    field :nickname, :string
+    field :image, :string
 
     timestamps()
   end
@@ -11,7 +17,7 @@ defmodule Core.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email])
+    |> cast(attrs, [:email, :provider, :uid, :name, :nickname, :image])
     |> validate_required([:email])
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/@/)
