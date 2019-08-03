@@ -16,8 +16,16 @@ defmodule ApiWeb.Auth.OAuthControllerTest do
              |> assign(:ueberauth_auth, facebook_auth)
              |> get("/auth/facebook/callback")
 
-      email = facebook_auth.info.email
-      assert %{"email" => email} = json_response(conn, 201)["data"]
+      with %{
+             "data" =>
+             %{
+               "email" => email,
+             }
+           } <- json_response(conn, 201) do
+        assert email == facebook_auth.info.email
+      else
+        _ -> assert false
+      end
     end
 
     test "renders errors when user already exists", %{conn: conn} do
@@ -34,9 +42,22 @@ defmodule ApiWeb.Auth.OAuthControllerTest do
         |> assign(:ueberauth_auth, facebook_auth)
         |> get("/auth/facebook/callback")
 
-      response_body = json_response(conn, 201)
-      assert response_body["errors"] == nil
-      assert %{"id" => id} = response_body["data"]
+      with %{
+             "data" =>
+             %{
+               "id" => id,
+               "email" => email,
+               "inserted_at" => inserted_at,
+               "updated_at" => updated_at
+             }
+           } <- json_response(conn, 201) do
+        assert id == user.id
+        assert email == user.email
+        assert inserted_at == NaiveDateTime.to_iso8601(user.inserted_at)
+        assert updated_at == NaiveDateTime.to_iso8601(user.updated_at)
+      else
+        _ -> assert false
+      end
     end
   end
 end
