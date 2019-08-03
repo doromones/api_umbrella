@@ -1,5 +1,12 @@
 use Mix.Config
 
+#config :cors_plug,
+#       origin: [
+#         "https://server.dev"
+#       ],
+#       max_age: 86400,
+#       methods: ["GET", "POST"]
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
