@@ -4,7 +4,9 @@ defmodule Core.UserFactory do
 
       def user_factory do
         %Core.Accounts.User{
-          email: sequence(:email, &"email-#{&1}@example.com")
+          email: sequence(:email, &"email-#{&1}@example.com"),
+          provider: "facebook",
+          uid: sequence(:email, &"1111111111111111#{&1}"),
         }
       end
 

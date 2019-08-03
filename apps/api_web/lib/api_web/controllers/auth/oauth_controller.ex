@@ -5,7 +5,14 @@ defmodule ApiWeb.Auth.OAuthController do
   alias Core.Accounts
   alias Core.Accounts.User
 
-  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
+  def callback(
+        %{
+          assigns: %{
+            ueberauth_auth: auth
+          }
+        } = conn,
+        _params
+      ) do
     auth
     |> inspect(pretty: true)
     |> :logger.debug
@@ -19,11 +26,18 @@ defmodule ApiWeb.Auth.OAuthController do
       uid: auth.uid
     }
 
-    with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", Routes.user_path(conn, :show, user))
-      |> render("callback.json", %{user: user})
-    end
+    user = Accounts.get_user_by_oauth(user_params.provider, user_params.uid)
+    user =
+      if user do
+        user
+      else
+        {:ok, %User{} = user} = Accounts.create_user(user_params);
+        user
+      end
+
+    conn
+    |> put_status(:created)
+    |> put_resp_header("location", Routes.user_path(conn, :show, user))
+    |> render("callback.json", %{user: user})
   end
 end

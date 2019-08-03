@@ -16,10 +16,29 @@ defmodule ApiWeb.Auth.OAuthControllerTest do
              |> assign(:ueberauth_auth, facebook_auth)
              |> get("/auth/facebook/callback")
 
-      IO.inspect(json_response(conn, 201))
-
       email = facebook_auth.info.email
       assert %{"email" => email} = json_response(conn, 201)["data"]
+    end
+
+    test "renders errors when user already exists", %{conn: conn} do
+      user = insert(:user)
+
+      facebook_auth =
+        params_for(:oauth_facebook)
+        |> put_in([:info, :email], user.email)
+        |> put_in([:provider], user.provider)
+        |> put_in([:uid], user.uid)
+
+      conn =
+        conn
+        |> assign(:ueberauth_auth, facebook_auth)
+        |> get("/auth/facebook/callback")
+
+      response_body = json_response(conn, 201)
+      IO.inspect(response_body)
+      IO.inspect(user)
+      assert response_body["errors"] == nil
+      assert %{"id" => id} = response_body["data"]
     end
   end
 end

@@ -7,21 +7,25 @@ defmodule Core.OAuthFactory do
       alias Ueberauth.Auth.Extra
 
       def oauth_facebook_factory do
+        user = params_for(:user)
         %{
-          credentials: %Credentials{
+          credentials: %{
             token: sequence(:token, &"1111111111111111#{&1}")
           },
-          extra: %Extra{
+          extra: %{
 
           },
-          info: %Info{
-            email: sequence(:email, &"email-#{&1}@example.com"),
+          info: %{
+            email: user.email,
+            name: user.name,
             first_name: sequence(:first_name, &"first_name-#{&1}"),
-            last_name: sequence(:last_name, &"last_name-#{&1}")
+            last_name: sequence(:last_name, &"last_name-#{&1}"),
+            nickname: user.nickname,
+            image: user.image
           },
-          provider: "facebook",
+          provider: user.provider,
           strategy: Ueberauth.Strategy.Facebook,
-          uid: sequence(:uid, &"111111111#{&1}")
+          uid: user.uid
         }
       end
     end
