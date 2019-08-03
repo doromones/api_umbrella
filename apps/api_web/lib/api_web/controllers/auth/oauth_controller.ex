@@ -22,7 +22,7 @@ defmodule ApiWeb.Auth.OAuthController do
       first_name: auth.info.first_name,
       last_name: auth.info.last_name,
       email: auth.info.email,
-      provider: auth.provider,
+      provider: to_string(auth.provider),
       uid: auth.uid
     }
 
