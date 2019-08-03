@@ -14,7 +14,8 @@ defmodule ApiWeb.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
     ]
   end
 
@@ -24,7 +25,11 @@ defmodule ApiWeb.MixProject do
   def application do
     [
       mod: {ApiWeb.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [
+        :logger,
+        :runtime_tools,
+        :ueberauth_facebook
+      ]
     ]
   end
 
@@ -43,7 +48,12 @@ defmodule ApiWeb.MixProject do
       {:gettext, "~> 0.11"},
       {:core, in_umbrella: true},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:poison, "~> 3.1"},
+#      {:guardian, git: "https://github.com/ueberauth/guardian.git"},
+      {:guardian, "~> 1.0"},
+      {:ueberauth_facebook, "~> 0.8"},
+      {:cors_plug, "~> 2.0"}
     ]
   end
 

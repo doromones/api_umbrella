@@ -37,6 +37,10 @@ defmodule Core.Accounts do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  def get_user_by_oauth(provider, uid) do
+    Repo.get_by(User, provider: provider, uid: uid)
+  end
+
   @doc """
   Creates a user.
 

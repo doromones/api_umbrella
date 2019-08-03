@@ -24,3 +24,7 @@ erl_crash.dump
 /.idea/
 *.iml
 .elixir_ls/
+
+/priv/plts/*.plt
+/priv/plts/*.plt.hash
+config/*.local.exs

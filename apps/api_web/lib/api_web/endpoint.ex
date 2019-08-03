@@ -1,5 +1,6 @@
 defmodule ApiWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :api_web
+  plug CORSPlug
 
   socket "/socket", ApiWeb.UserSocket,
     websocket: true,
