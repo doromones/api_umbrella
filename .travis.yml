@@ -8,6 +8,9 @@ elixir:
 otp_release:
   - 22.0.3
 
+before_script:
+  - psql -c 'create database core_test;' -U postgres
+
 script:
   - MIX_ENV=test mix do compile --warnings-as-errors, coveralls.json
   - mix dialyzer --halt-exit-status
