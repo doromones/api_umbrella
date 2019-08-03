@@ -35,9 +35,6 @@ defmodule ApiWeb.Auth.OAuthController do
     {:ok, token, _} = ApiWeb.Guardian.encode_and_sign(user, %{}, token_type: :access)
 
     conn
-    |> put_resp_header("authorization", "Bearer: #{token}")
-    |> put_status(:created)
-    |> put_resp_header("location", Routes.user_path(conn, :show, user))
-    |> render("callback.json", %{user: user})
+    |> redirect(external: "https://server.dev/#token=#{token}")
   end
 end

@@ -16,7 +16,7 @@ defmodule CoreWeb.Router do
   scope "/", CoreWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/*path", PageController, :index
   end
 
   # Other scopes may use custom stacks.
