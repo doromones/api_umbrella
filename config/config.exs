@@ -31,7 +31,7 @@ config :api_web, ApiWeb.Endpoint,
 
 config :api_web, ApiWeb.Guardian,
        issuer: :api_web,
-       secret_key: Mix.env()
+       secret_key: "Sb0zJMY8lxOD299doNrSMplgr9sFMSV8ca5davfIGjl4FYleaNzFawoEuykFNkKT"
 
 # Configure Mix tasks and generators
 config :core,

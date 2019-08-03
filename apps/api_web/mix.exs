@@ -50,7 +50,8 @@ defmodule ApiWeb.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:poison, "~> 3.1"},
-      {:guardian, git: "https://github.com/ueberauth/guardian.git"},
+#      {:guardian, git: "https://github.com/ueberauth/guardian.git"},
+      {:guardian, "~> 1.0"},
       {:ueberauth_facebook, "~> 0.8"},
       {:cors_plug, "~> 2.0"}
     ]

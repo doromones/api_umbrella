@@ -13,9 +13,6 @@ defmodule ApiWeb.Auth.OAuthController do
         } = conn,
         _params
       ) do
-    auth
-    |> inspect(pretty: true)
-    |> :logger.debug
 
     user_params = %{
       token: auth.credentials.token,
@@ -35,7 +32,10 @@ defmodule ApiWeb.Auth.OAuthController do
         user
       end
 
+    {:ok, token, _} = ApiWeb.Guardian.encode_and_sign(user, %{}, token_type: :access)
+
     conn
+    |> put_resp_header("authorization", "Bearer: #{token}")
     |> put_status(:created)
     |> put_resp_header("location", Routes.user_path(conn, :show, user))
     |> render("callback.json", %{user: user})
