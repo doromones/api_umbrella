@@ -8,6 +8,7 @@ use Mix.Config
 # with webpack to recompile .js and .css sources.
 config :api_web, ApiWeb.Endpoint,
   http: [port: 4001],
+#  url: [scheme: "https", host: "api.server.dev", port: 443],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
