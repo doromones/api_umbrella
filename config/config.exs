@@ -45,7 +45,7 @@ config :core_web,
 config :core_web, CoreWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "/YcyOBLUKdVoQOBxKMG5rMPU89E27RzvsSEIx20VQ62GjE/r2iEWvqFyMbhy43tZ",
-  render_errors: [view: CoreWeb.ErrorView, accepts: ~w(json)],
+  render_errors: [view: CoreWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: CoreWeb.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
