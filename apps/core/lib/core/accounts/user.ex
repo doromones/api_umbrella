@@ -6,7 +6,6 @@ defmodule Core.Accounts.User do
     field :email, :string
     field :provider, :string
     field :uid, :string
-    field :token, :string
     field :name, :string
     field :nickname, :string
     field :image, :string
