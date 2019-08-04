@@ -1,3 +1,4 @@
 <div>
     <%= link("Facebook OAuth", to: ApiWeb.Router.Helpers.o_auth_url(ApiWeb.Endpoint, :request, :facebook)) %>
 </div>
+<div id="react-app"></div>
