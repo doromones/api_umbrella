@@ -54,7 +54,7 @@ defmodule Core.MixProject do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      test: ["ecto.drop", "ecto.create", "ecto.migrate", "test"],
       "ecto.migrate": (if Mix.env() == :test, do: ["ecto.migrate"], else: ["ecto.migrate", "ecto.dump"]),
       "ecto.rollback": ["ecto.rollback", "ecto.dump"]
     ]
