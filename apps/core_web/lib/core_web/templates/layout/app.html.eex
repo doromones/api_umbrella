@@ -12,6 +12,7 @@
         <%= link("Facebook OAuth", to: ApiWeb.Router.Helpers.o_auth_url(ApiWeb.Endpoint, :request, :facebook)) %>
     </div>-->
     <div id="react-app"></div>
+    <%= render "_js_config_vars.html" %>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>l
 </html>

@@ -3,13 +3,15 @@ import {FacebookProvider, LoginButton} from 'react-facebook';
 
 import Main from '../components/Main';
 
+const FACEBOOK_CLIENT_ID = window.CONFIG.FACEBOOK_CLIENT_ID;
+
 export default class AuthPage extends React.Component<{}> {
     public render(): JSX.Element {
         return (
             <Main>
                 <h1>Auth</h1>
 
-                <FacebookProvider appId="396560614313271">
+                <FacebookProvider appId={FACEBOOK_CLIENT_ID}>
                     <LoginButton
                         scope="email"
                         onCompleted={this.handleResponse}
