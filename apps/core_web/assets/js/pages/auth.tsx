@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FacebookProvider, LoginButton} from 'react-facebook';
+import FacebookLogin from 'react-facebook-login';
 
 import Main from '../components/Main';
 
@@ -10,46 +10,37 @@ export default class AuthPage extends React.Component<{}> {
         return (
             <Main>
                 <h1>Auth</h1>
-
-                <FacebookProvider appId={FACEBOOK_CLIENT_ID}>
-                    <LoginButton
-                        scope="email"
-                        onCompleted={this.handleResponse}
-                        onError={this.handleError}
-                    >
-                        <span>Login via Facebook</span>
-                    </LoginButton>
-                </FacebookProvider>
+                <FacebookLogin
+                    appId={FACEBOOK_CLIENT_ID}
+                    autoLoad={true}
+                    fields="name,email,picture"
+                    callback={this.responseFacebook}/>
             </Main>
         );
     }
 
-    private handleResponse(data) {
-        console.log(data);
-        console.log(data.tokenDetail.accessToken);
-        // const tokenBlob = new Blob([
-        //         JSON.stringify({access_token: response.accessToken}, null, 2)
-        //     ],
-        //     {type: 'application/json'}
-        // );
-        // const options = {
-        //     method: 'POST',
-        //     body: tokenBlob,
-        //     mode: 'cors',
-        //     cache: 'default'
-        // };
-        // fetch('https://localhost:4000/api/v1/auth/facebook', options).then(r => {
-        //     const token = r.headers.get('x-auth-token');
-        //     r.json().then(user => {
-        //         if (token) {
-        //             this.setState({isAuthenticated: true, user, token})
-        //         }
-        //     });
-        // })
-    }
+    responseFacebook = (response: any) => {
+        console.log(response)
+        this.getUserData("facebook", response.accessToken)
+    };
 
-    private handleError(error) {
-        console.log("handleError", error)
-        // this.setState({error});
+    getUserData(provider: string, accessToken: string) : void {
+        const options = {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'default'
+        };
+
+        const url = `https://api.server.dev/auth/${provider}/callback?access_token=${accessToken}`;
+        fetch(url, options).then(r => {
+            console.log(r)
+            const token = r.headers.get('x-auth-token');
+            r.json().then(json => {
+                console.log(json)
+                // if (token) {
+                //     this.setState({isAuthenticated: true, user, token})
+                // }
+            });
+        })
     }
 }
