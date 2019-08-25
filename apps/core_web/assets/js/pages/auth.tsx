@@ -24,23 +24,30 @@ export default class AuthPage extends React.Component<{}> {
         this.getUserData("facebook", response.accessToken)
     };
 
-    getUserData(provider: string, accessToken: string) : void {
+    getUserData(provider: string, accessToken: string): void {
         const options = {
             method: 'GET',
             mode: 'cors',
             cache: 'default'
         };
-
-        const url = `https://api.server.dev/auth/${provider}/callback?access_token=${accessToken}`;
+        const domain = "https://api.server.dev";
+        const url = `${domain}/auth/${provider}/callback?access_token=${accessToken}`;
         fetch(url, options).then(r => {
-            console.log(r)
-            const token = r.headers.get('x-auth-token');
-            r.json().then(json => {
-                console.log(json)
-                // if (token) {
-                //     this.setState({isAuthenticated: true, user, token})
-                // }
-            });
+            const token = r.headers.get('Authorization');
+            console.log(`token: ${token}`)
+
+            options['headers'] = {
+                Authorization: token
+            };
+
+            // fetch(`${domain}/users`, options)
+
+            // r.json().then(json => {
+            //     console.log(json)
+            //     // if (token) {
+            //     //     this.setState({isAuthenticated: true, user, token})
+            //     // }
+            // });
         })
     }
 }

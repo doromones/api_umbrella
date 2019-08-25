@@ -5,10 +5,22 @@ defmodule ApiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
+  pipeline :auth do
+    plug ApiWeb.Guardian.Pipeline
+  end
+
   scope "/", ApiWeb do
     pipe_through :api
 
-    resources "/users", UserController, except: [:new, :edit]
+    scope "/" do
+      pipe_through [:auth, :ensure_auth]
+
+      resources "/users", UserController, except: [:new, :edit]
+    end
 
     scope "/auth", Auth do
 

@@ -51,7 +51,8 @@ defmodule ApiWeb.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:poison, "~> 3.1"},
       {:guardian, "~> 2.0"},
-      {:ueberauth_facebook, "~> 0.8"},
+#      {:ueberauth_facebook, "~> 0.8"},
+      {:ueberauth_facebook, git: "https://github.com/doromones/ueberauth_facebook.git", branch: "feature/add_access_token_auth"},
       {:cors_plug, "~> 2.0"}
     ]
   end
