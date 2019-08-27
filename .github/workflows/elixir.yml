@@ -28,7 +28,7 @@ jobs:
     - name: Install Dependencies
       run: |
         apt-get update 
-        apt-get install -y postgresql-client
+        apt-get install -y postgresql-client-11
         mix local.rebar --force
         mix local.hex --force
         mix deps.get
