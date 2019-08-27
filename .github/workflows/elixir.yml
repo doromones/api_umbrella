@@ -23,6 +23,12 @@ jobs:
     container:
       image: elixir:1.9.1-slim
 
+    env:
+      # use postgres for the host here because we have specified a contaienr for the job.
+      # If we were running the job on the VM this would be localhost
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }} # get randomly assigned published port
+
     steps:
     - uses: actions/checkout@v1
     - name: Install Postgresql 11
@@ -40,11 +46,6 @@ jobs:
         mix deps.get
     - name: Run Tests
       run: mix test
-      env:
-        # use postgres for the host here because we have specified a contaienr for the job.
-        # If we were running the job on the VM this would be localhost
-        POSTGRES_HOST: postgres
-        POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }} # get randomly assigned published port
     - name: Generate coverage report
       run: |
         MIX_ENV=test mix do compile --warnings-as-errors, coveralls.json
