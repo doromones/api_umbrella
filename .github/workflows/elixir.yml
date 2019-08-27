@@ -45,7 +45,13 @@ jobs:
         # If we were running the job on the VM this would be localhost
         POSTGRES_HOST: postgres
         POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }} # get randomly assigned published port
+    - name: Generate coverage report
+      run: |
+        MIX_ENV=test mix do compile --warnings-as-errors, coveralls.json
+        mix dialyzer --halt-exit-status
     - name: Upload coverage to Codecov  
       uses: codecov/codecov-action@v1.0.2
       with:
         token: ${{secrets.CODECOV_TOKEN}}
+        file: ./coveralls.json
+        
