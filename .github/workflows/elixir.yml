@@ -25,9 +25,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - uses: codecov/codecov-action@v1.0.2
-      with:
-        token: ${{secrets.CODECOV_TOKEN}} #required
     - name: Install Postgresql 11
       run: |
         apt-get update 
@@ -48,3 +45,7 @@ jobs:
         # If we were running the job on the VM this would be localhost
         POSTGRES_HOST: postgres
         POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }} # get randomly assigned published port
+    - name: Upload coverage to Codecov  
+      uses: codecov/codecov-action@v1.0.2
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
