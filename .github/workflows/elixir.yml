@@ -46,7 +46,8 @@ jobs:
     - name: Generate coverage report
       run: |
         MIX_ENV=test mix do compile --warnings-as-errors, coveralls.json
-        mix dialyzer --halt-exit-status
+        ls -la
+        # mix dialyzer --halt-exit-status
       env:
         POSTGRES_HOST: postgres
         POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
