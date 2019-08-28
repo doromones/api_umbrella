@@ -25,14 +25,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Install Postgresql 11
-      run: |
-        apt-get update
-        apt-get install -y wget gnupg
-        wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-        echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
-        apt-get update
-        apt-get install -y postgresql-client-11
+    - name: Install system dependencies
+      run:
+        - |
+          apt-get update
+          apt-get install -y wget gnupg tree
+        - |
+        # install postgresql
+          wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+          echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
+          apt-get update
+          apt-get install -y postgresql-client-11
 
     - name: Install Dependencies
       run: |
@@ -56,12 +59,14 @@ jobs:
     - name: Generate coverage report
       run: |
         MIX_ENV=test mix do compile --warnings-as-errors, coveralls.json -u
+        run: tree ./
       env:
         POSTGRES_HOST: postgres
         POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1.0.2
+      run: tree ./
       with:
         token: ${{secrets.CODECOV_TOKEN}}
         file: ./cover/excoveralls.json
