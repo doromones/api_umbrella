@@ -25,6 +25,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+
     - name: Install system dependencies
       run: |
         apt-get update
@@ -56,7 +57,7 @@ jobs:
     - name: Generate coverage report
       run: |
         MIX_ENV=test mix do compile --warnings-as-errors, coveralls.json -u
-        run: tree ./
+        tree ./
       env:
         POSTGRES_HOST: postgres
         POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
