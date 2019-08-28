@@ -26,12 +26,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Install system dependencies
-      run:
-        - |
+      run: |
           apt-get update
           apt-get install -y wget gnupg tree
-        - |
-        # install postgresql
+      # install postgresql
           wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
           echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
           apt-get update
