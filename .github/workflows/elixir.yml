@@ -29,7 +29,7 @@ jobs:
     - name: Install system dependencies
       run: |
         apt-get update
-        apt-get install -y wget gnupg tree
+        apt-get install -y wget gnupg
         wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
         echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
         apt-get update
@@ -57,7 +57,6 @@ jobs:
     - name: Generate coverage report
       run: |
         MIX_ENV=test mix do compile --warnings-as-errors, coveralls.json -u
-        tree ./
       env:
         POSTGRES_HOST: postgres
         POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
