@@ -63,7 +63,6 @@ jobs:
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1.0.2
-      run: tree ./
       with:
         token: ${{secrets.CODECOV_TOKEN}}
         file: ./cover/excoveralls.json
