@@ -27,13 +27,13 @@ jobs:
     - uses: actions/checkout@v1
     - name: Install system dependencies
       run: |
-          apt-get update
-          apt-get install -y wget gnupg tree
+        apt-get update
+        apt-get install -y wget gnupg tree
       # install postgresql
-          wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-          echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
-          apt-get update
-          apt-get install -y postgresql-client-11
+        wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+        echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
+        apt-get update
+        apt-get install -y postgresql-client-11
 
     - name: Install Dependencies
       run: |
