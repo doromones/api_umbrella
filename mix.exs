@@ -8,10 +8,13 @@ defmodule Core.Umbrella.MixProject do
       deps: deps(),
       preferred_cli_env: [
         coveralls: :test,
+        "coveralls.detail": :test,
         "coveralls.html": :test,
         "coveralls.json": :test,
       ],
-      test_coverage: [tool: ExCoveralls],
+      test_coverage: [
+        tool: ExCoveralls
+      ],
       dialyzer: [
         plt_add_deps: :transitive,
         ignore_warnings: "config/dialyzer_ignore.exs"
