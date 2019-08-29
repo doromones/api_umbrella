@@ -35,15 +35,15 @@ jobs:
         apt-get update
         apt-get install -y postgresql-client-11
 
-#    - uses: actions/download-artifact@master
-#      with:
-#        name: elixir-deps
-#        path: deps
-#
-#    - uses: actions/download-artifact@master
-#      with:
-#        name: elixir-build
-#        path: _build
+    - uses: actions/download-artifact@master
+      with:
+        name: elixir-deps
+        path: deps
+
+    - uses: actions/download-artifact@master
+      with:
+        name: elixir-build
+        path: _build
 
     - name: Install Dependencies
       run: |
