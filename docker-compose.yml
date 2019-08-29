@@ -1,0 +1,29 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: mix phx.server
+    volumes:
+      - .:/home/app
+    ports:
+      - "4000:4000"
+      - "4001:4001"
+    links:
+      - db
+    depends_on:
+      - db
+  test:
+    image: apiumbrella_web
+    command: mix test
+    environment:
+      MIX_ENV: test
+      PORT: 4001
+    volumes:
+      - .:/home/app
+  db:
+    image: postgres:12
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres

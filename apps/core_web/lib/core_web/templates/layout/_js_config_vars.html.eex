@@ -1,0 +1,5 @@
+<script type="text/javascript">
+    window.CONFIG = {
+        FACEBOOK_CLIENT_ID: "<%= Application.get_env(:ueberauth, Ueberauth.Strategy.Facebook.OAuth)[:client_id] %>"
+    }
+</script>
