@@ -35,6 +35,16 @@ jobs:
         apt-get update
         apt-get install -y postgresql-client-11
 
+    - uses: actions/download-artifact@master
+      with:
+        name: elixir-deps
+        path: deps
+
+    - uses: actions/download-artifact@master
+      with:
+        name: elixir-build
+        path: _build
+
     - name: Install Dependencies
       run: |
         mix local.rebar --force
@@ -47,12 +57,12 @@ jobs:
         POSTGRES_HOST: postgres
         POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
 
-#    - name: Run static code analize
-#      run: |
-#        mix dialyzer --halt-exit-status
-#      env:
-#        POSTGRES_HOST: postgres
-#        POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+    - name: Run static code analize
+      run: |
+        mix dialyzer --halt-exit-status
+      env:
+        POSTGRES_HOST: postgres
+        POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
 
     - name: Generate coverage report
       run: |
@@ -67,3 +77,12 @@ jobs:
         token: ${{secrets.CODECOV_TOKEN}}
         file: ./cover/excoveralls.json
 
+    - uses: actions/upload-artifact@master
+      with:
+        name: elixir-deps
+        path: deps
+
+    - uses: actions/upload-artifact@master
+      with:
+        name: elixir-build
+        path: _build
