@@ -30,14 +30,17 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Install Dependencies
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Install Node Modules
         run: |
-          npm install -g yarn
           cd ./apps/core_web/assets/
-          yarn install
+          yarn
 
       - name: Run test
         run: |
+          cd ./apps/core_web/assets/
           yarn run test
 
 
