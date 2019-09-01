@@ -20,8 +20,13 @@ export default class AuthPage extends React.Component<{}> {
     }
 
     responseFacebook = (response: any) => {
+        console.log(this.props)
         console.log(response)
-        this.getUserData("facebook", response.accessToken)
+        // debugger
+        // const { dispatch } = this.props;
+
+        // dispatch(userActions.login("facebook", response.accessToken));
+        // this.getUserData("facebook", response.accessToken)
     };
 
     getUserData(provider: string, accessToken: string): void {
