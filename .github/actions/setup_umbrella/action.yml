@@ -1,5 +1,0 @@
-name: Setup umbrella
-description: Setup umbrella
-runs:
-  using: node12
-  main: lib/main.js
