@@ -2,4 +2,4 @@ name: Setup umbrella
 description: Setup umbrella
 runs:
   using: node12
-  main: main.js
+  main: lib/main.js
