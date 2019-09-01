@@ -1,0 +1,90 @@
+name: Elixir CI
+
+on: push
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: core_test
+        ports:
+        # will assign a random free host port
+        - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    container:
+      image: elixir:1.9.1-slim
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Install system dependencies
+      run: |
+        apt-get update
+        apt-get install -y wget gnupg git
+        wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+        echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
+        apt-get update
+        apt-get install -y postgresql-client-11
+
+#    - uses: actions/download-artifact@master
+#      with:
+#        name: elixir-deps
+#        path: deps
+#
+#    - uses: actions/download-artifact@master
+#      with:
+#        name: elixir-build
+#        path: _build
+
+    - name: Install Dependencies
+      run: |
+        mix local.rebar --force
+        mix local.hex --force
+        mix deps.get
+
+    - name: Run Tests
+      run: mix test
+      env:
+        POSTGRES_HOST: postgres
+        POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+
+#    - name: Run static code analize
+#      run: |
+#        mix dialyzer --halt-exit-status
+#      env:
+#        POSTGRES_HOST: postgres
+#        POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+
+    - name: Generate coverage report
+      run: |
+        MIX_ENV=test mix do compile --warnings-as-errors, coveralls.json -u
+      env:
+        POSTGRES_HOST: postgres
+        POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1.0.2
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        file: ./cover/excoveralls.json
+
+#    - name: Upload artifact "elixir-deps"
+#      uses: actions/upload-artifact@master
+#      with:
+#        name: elixir-deps
+#        path: deps
+#
+#    - name: Upload artifact "elixir-build"
+#      uses: actions/upload-artifact@master
+#      with:
+#        name: elixir-build
+#        path: _build
