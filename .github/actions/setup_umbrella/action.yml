@@ -1,6 +1,8 @@
 jobs:
   build:
     name: Setup umbrella
+    container:
+      image: elixir:1.9.1-slim
     steps:
       - name: Install Dependencies
         run: |
