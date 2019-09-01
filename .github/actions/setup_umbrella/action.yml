@@ -1,11 +1,5 @@
-jobs:
-  build:
-    name: Setup umbrella
-    container:
-      image: elixir:1.9.1-slim
-    steps:
-      - name: Install Dependencies
-        run: |
-          mix local.rebar --force
-          mix local.hex --force
-          mix deps.get
+name: Setup umbrella
+description: Setup umbrella
+runs:
+  using: bash
+  main: main.sh
