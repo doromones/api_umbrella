@@ -35,16 +35,6 @@ jobs:
         apt-get update
         apt-get install -y postgresql-client-11
 
-#    - uses: actions/download-artifact@master
-#      with:
-#        name: elixir-deps
-#        path: deps
-#
-#    - uses: actions/download-artifact@master
-#      with:
-#        name: elixir-build
-#        path: _build
-
     - name: Install Dependencies
       run: |
         mix local.rebar --force
@@ -76,15 +66,3 @@ jobs:
       with:
         token: ${{secrets.CODECOV_TOKEN}}
         file: ./cover/excoveralls.json
-
-#    - name: Upload artifact "elixir-deps"
-#      uses: actions/upload-artifact@master
-#      with:
-#        name: elixir-deps
-#        path: deps
-#
-#    - name: Upload artifact "elixir-build"
-#      uses: actions/upload-artifact@master
-#      with:
-#        name: elixir-build
-#        path: _build
