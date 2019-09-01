@@ -25,7 +25,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - uses: ./.github/actions/setup_umbrella
 
     - name: Install system dependencies
       run: |
@@ -35,6 +34,12 @@ jobs:
         echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
         apt-get update
         apt-get install -y postgresql-client-11
+
+    - name: Install Dependencies
+      run: |
+        mix local.rebar --force
+        mix local.hex --force
+        mix deps.get
 
     - name: Run Tests
       run: mix test

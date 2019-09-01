@@ -9,10 +9,14 @@ jobs:
     strategy:
       matrix:
         node: [ '12', '10', '8' ]
-
+    container:
+      image: elixir:1.9.1-slim
     steps:
       - uses: actions/checkout@v1
-      - uses: ./.github/actions/setup_umbrella
+
+      - name: Install Phoenix Dependencies
+        run: |
+          mix deps.get
 
       - name: Setup node
         uses: actions/setup-node@v1
