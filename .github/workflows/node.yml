@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+      - uses: ./.github/actions/setup_umbrella
+
       - name: Setup node
         uses: actions/setup-node@v1
         with:
