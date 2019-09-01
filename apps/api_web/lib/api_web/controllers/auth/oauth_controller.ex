@@ -36,7 +36,7 @@ defmodule ApiWeb.Auth.OAuthController do
 
     conn
     |> put_status(:created)
-    |> put_resp_header("Authorization", "Bearer #{token}")
+    |> put_resp_header("authorization", "Bearer #{token}")
     |> render("callback.json", user: user)
   end
 end
