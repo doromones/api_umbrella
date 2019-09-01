@@ -1,0 +1,7 @@
+{
+  "name": "setup_umbrella",
+  "version": "1.0.0",
+  "dependencies": {
+    "@actions/exec": "^1.0.0"
+  }
+}

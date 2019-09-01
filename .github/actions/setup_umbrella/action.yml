@@ -1,5 +1,5 @@
 name: Setup umbrella
 description: Setup umbrella
 runs:
-  using: bash
-  main: main.sh
+  using: node12
+  main: main.js

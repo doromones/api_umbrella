@@ -32,3 +32,4 @@ config/*.local.exs
 /cover/*
 /tmp_vendors/*
 __snapshots__/
+node_modules/
