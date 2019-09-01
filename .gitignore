@@ -31,3 +31,4 @@ config/*.local.exs
 
 /cover/*
 /tmp_vendors/*
+__snapshots__/
