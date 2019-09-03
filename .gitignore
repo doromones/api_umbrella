@@ -33,3 +33,4 @@ config/*.local.exs
 /tmp_vendors/*
 __snapshots__/
 node_modules/
+coverage/
