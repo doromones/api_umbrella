@@ -13,10 +13,10 @@
         <%= link("Facebook OAuth", to: ApiWeb.Router.Helpers.o_auth_url(ApiWeb.Endpoint, :request, :facebook)) %>
     </div>-->
     <%= render "_js_config_vars.html" %>
-    <script type="text/javascript" type="module" src="<%= Routes.static_path(@conn, "/js/runtime.js") %>"></script>
-    <script type="text/javascript" type="module" src="<%= Routes.static_path(@conn, "/js/polyfills.js") %>"></script>
-    <script type="text/javascript" type="module" src="<%= Routes.static_path(@conn, "/js/styles.js") %>"></script>
-    <script type="text/javascript" type="module" src="<%= Routes.static_path(@conn, "/js/vendor.js") %>"></script>
-    <script type="text/javascript" type="module" src="<%= Routes.static_path(@conn, "/js/main.js") %>"></script>
+    <script type="module" src="<%= Routes.static_path(@conn, "/js/runtime.js") %>"></script>
+    <script type="module" src="<%= Routes.static_path(@conn, "/js/polyfills.js") %>"></script>
+    <script type="module" src="<%= Routes.static_path(@conn, "/js/styles.js") %>"></script>
+    <script type="module" src="<%= Routes.static_path(@conn, "/js/vendor.js") %>"></script>
+    <script type="module" src="<%= Routes.static_path(@conn, "/js/main.js") %>"></script>
   </body>
 </html>
