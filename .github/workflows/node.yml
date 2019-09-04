@@ -40,9 +40,14 @@ jobs:
           cd ./apps/core_web/assets/
           yarn
 
-      - name: Run test
+      - name: Run Lint
         run: |
           cd ./apps/core_web/assets/
-          yarn run test
+          yarn run lint
+
+      - name: Run Tests
+        run: |
+          cd ./apps/core_web/assets/
+          yarn run test:headles
 
 
