@@ -4,9 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {SharedModule} from './shared/shared.module';
-import {AuthServiceConfig, FacebookLoginProvider, SocialLoginModule} from "angularx-social-login";
+import {AuthServiceConfig, FacebookLoginProvider, SocialLoginModule} from 'angularx-social-login';
 
-let config = new AuthServiceConfig([
+const config = new AuthServiceConfig([
   {
     id: FacebookLoginProvider.PROVIDER_ID,
     provider: new FacebookLoginProvider(window.CONFIG.FACEBOOK_CLIENT_ID)
