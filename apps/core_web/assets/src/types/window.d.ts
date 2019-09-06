@@ -1,7 +1,7 @@
 interface IConfig {
-  FACEBOOK_CLIENT_ID: string
+  readonly FACEBOOK_CLIENT_ID: string
 }
 interface Window {
-  CONFIG: IConfig;
+  readonly CONFIG: IConfig;
 }
 
