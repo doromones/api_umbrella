@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <base href="/">
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>CoreWeb · Phoenix Framework</title>
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body>
+    <app-root></app-root>
     <!--<div>
         <%= link("Facebook OAuth", to: ApiWeb.Router.Helpers.o_auth_url(ApiWeb.Endpoint, :request, :facebook)) %>
     </div>-->
-    <div id="react-app"></div>
     <%= render "_js_config_vars.html" %>
-    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-  </body>l
+    <script type="module" src="<%= Routes.static_path(@conn, "/js/runtime.js") %>"></script>
+    <script type="module" src="<%= Routes.static_path(@conn, "/js/polyfills.js") %>"></script>
+    <script type="module" src="<%= Routes.static_path(@conn, "/js/styles.js") %>"></script>
+    <script type="module" src="<%= Routes.static_path(@conn, "/js/vendor.js") %>"></script>
+    <script type="module" src="<%= Routes.static_path(@conn, "/js/main.js") %>"></script>
+  </body>
 </html>

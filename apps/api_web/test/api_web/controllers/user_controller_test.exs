@@ -5,13 +5,27 @@ defmodule ApiWeb.UserControllerTest do
   alias Core.Accounts.User
 
   setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+    user = insert(:user)
+    {:ok, token, _} = ApiWeb.Guardian.encode_and_sign(user)
+
+    conn =
+      conn
+      |> put_req_header("accept", "application/json")
+      |> put_req_header("authorization", "Bearer #{token}")
+
+    {:ok, conn: conn, current_user: user}
   end
 
   describe "index" do
-    test "lists all users", %{conn: conn} do
+    test "lists all users", %{conn: conn, current_user: user} do
       conn = get(conn, Routes.user_path(conn, :index))
-      assert json_response(conn, 200)["data"] == []
+
+      render_users =
+        ApiWeb.UserView.render("index.json", %{users: [user]})
+        |> Jason.encode!
+        |> Jason.decode!
+
+      assert json_response(conn, 200) == render_users
     end
   end
 

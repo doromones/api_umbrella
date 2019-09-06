@@ -1,0 +1,53 @@
+name: Node CI
+
+on: push
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ '12', '10' ]
+    steps:
+      - uses: actions/checkout@v1
+#      - uses: actions/setup-elixir@v1.0.0
+#        with:
+#          otp-version: 22.x
+#          elixir-version: 1.9.x
+
+#      - name: Install system dependencies
+#        run: |
+#          sudo apt-get update
+#          sudo apt-get install -y git
+
+#      - name: Install Phoenix Dependencies
+#        run: |
+#          mix local.rebar --force
+#          mix local.hex --force
+#          mix deps.get
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Install Node Modules
+        run: |
+          cd ./apps/core_web/assets/
+          yarn
+
+      - name: Run Lint
+        run: |
+          cd ./apps/core_web/assets/
+          yarn run lint
+
+      - name: Run Tests
+        run: |
+          cd ./apps/core_web/assets/
+          yarn run test:headles
+
+

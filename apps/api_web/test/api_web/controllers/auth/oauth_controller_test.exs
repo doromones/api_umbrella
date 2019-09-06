@@ -9,17 +9,8 @@ defmodule ApiWeb.Auth.OAuthControllerTest do
     {:ok, conn: conn}
   end
 
-  describe "create user" do
-    test "renders user when data is valid", %{conn: conn} do
-      facebook_auth = build(:oauth_facebook)
-      conn = conn
-             |> assign(:ueberauth_auth, facebook_auth)
-             |> get("/auth/facebook/callback")
-
-      assert redirected_to(conn, 302)
-    end
-
-    test "renders errors when user already exists", %{conn: conn} do
+  describe "auth" do
+    test "when user already exists", %{conn: conn} do
       user = insert(:user)
 
       facebook_auth =
@@ -33,7 +24,30 @@ defmodule ApiWeb.Auth.OAuthControllerTest do
         |> assign(:ueberauth_auth, facebook_auth)
         |> get("/auth/facebook/callback")
 
-      assert redirected_to(conn, 302)
+      render_user =
+        ApiWeb.Auth.OAuthView.render("callback.json", %{user: user})
+        |> Jason.encode!
+        |> Jason.decode!
+
+      assert json_response(conn, 201) == render_user
+    end
+  end
+
+  describe "create user" do
+    test "renders user when data is valid", %{conn: conn} do
+      facebook_auth = build(:oauth_facebook)
+      email = facebook_auth[:info][:email]
+
+      conn =
+        conn
+        |> assign(:ueberauth_auth, facebook_auth)
+        |> get("/auth/facebook/callback")
+
+      assert %{
+               "data" => %{
+                 "email" => ^email
+               }
+             } = json_response(conn, 201)
     end
   end
 end
