@@ -12,6 +12,7 @@ use Mix.Config
 import_config "api_web/config.exs"
 import_config "core/config.exs"
 import_config "core_web/config.exs"
+import_config "auth/config.exs"
 
 config :ueberauth, Ueberauth,
        providers: [
