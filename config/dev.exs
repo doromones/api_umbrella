@@ -8,20 +8,6 @@ config :cors_plug,
        methods: ["GET", "POST"],
        expose: ["Authorization"]
 
-# For development, we disable any cache and enable
-# debugging and code reloading.
-#
-# The watchers configuration can be used to run external
-# watchers to your application. For example, we use it
-# with webpack to recompile .js and .css sources.
-config :api_web, ApiWeb.Endpoint,
-  http: [port: 4001],
-#  url: [scheme: "https", host: "api.server.dev", port: 443],
-  debug_errors: true,
-  code_reloader: true,
-  check_origin: false,
-  watchers: []
-
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
