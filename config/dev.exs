@@ -67,11 +67,9 @@ config :core_web, CoreWeb.Endpoint,
        code_reloader: true,
        check_origin: false,
        watchers: [
-         node: [
-           "node_modules/webpack/bin/webpack.js",
-           "--mode",
-           "development",
-           "--watch-stdin",
+         npm: [
+           "run",
+           "watch",
            cd: Path.expand("../apps/core_web/assets", __DIR__)
          ]
        ]
@@ -109,13 +107,6 @@ config :core_web, CoreWeb.Endpoint,
            ~r"lib/core_web/{live,views}/.*(ex)$",
            ~r"lib/core_web/templates/.*(eex)$"
          ]
-       ],
-       watchers: [
-        npm: [
-          "run",
-          "watch",
-          cd: Path.expand("../apps/core_web/assets", __DIR__)
-        ]
        ]
 
 # Do not include metadata nor timestamps in development logs
