@@ -10,6 +10,7 @@
 use Mix.Config
 
 import_config "api_web/config.exs"
+import_config "core/config.exs"
 
 config :ueberauth, Ueberauth,
        providers: [
@@ -20,9 +21,6 @@ config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
        client_id: System.get_env("FACEBOOK_CLIENT_ID"),
        client_secret: System.get_env("FACEBOOK_CLIENT_SECRET")
 
-# Configure Mix tasks and generators
-config :core,
-  ecto_repos: [Core.Repo]
 
 config :core_web,
   ecto_repos: [Core.Repo],
