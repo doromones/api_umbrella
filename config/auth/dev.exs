@@ -23,15 +23,12 @@ config :auth, AuthWeb.Endpoint,
        code_reloader: true,
        check_origin: false,
        watchers: [
-              node: [
-                     "node_modules/webpack/bin/webpack.js",
-                     "--mode",
-                     "development",
-                     "--watch-stdin",
-                     cd: Path.expand("#{File.cwd!}/apps/auth/assets", __DIR__)
-              ]
+         npm: [
+           "run",
+           "watch",
+           cd: Path.expand("#{File.cwd!}/apps/auth/assets", __DIR__)
+         ]
        ]
-
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
