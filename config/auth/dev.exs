@@ -7,6 +7,7 @@ config :auth, Auth.Repo,
        password: "postgres",
        database: "core_dev",
        hostname: "localhost",
+       migration_default_prefix: "auth",
        show_sensitive_data_on_connection_error: true,
        pool_size: 10
 
