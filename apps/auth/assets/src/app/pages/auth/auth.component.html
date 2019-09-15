@@ -1,0 +1,16 @@
+<nav mat-tab-nav-bar>
+  <a mat-tab-link
+     routerLink="login"
+     routerLinkActive #routerLinkLogin="routerLinkActive"
+     [active]="routerLinkLogin.isActive">
+    Login
+  </a>
+  <a mat-tab-link
+     routerLink="registration"
+     routerLinkActive #routerLinkRegistration="routerLinkActive"
+     [active]="routerLinkRegistration.isActive">
+    Registration
+  </a>
+</nav>
+
+<router-outlet></router-outlet>

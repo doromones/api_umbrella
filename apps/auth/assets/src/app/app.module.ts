@@ -14,12 +14,17 @@ import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatButtonModule} from "@angular/material/button";
+import { AuthComponent } from './pages/auth/auth.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import { RegistrationComponent } from './pages/registration/registration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
+    AuthComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +36,8 @@ import {MatButtonModule} from "@angular/material/button";
     MatInputModule,
     ReactiveFormsModule,
     MatGridListModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
