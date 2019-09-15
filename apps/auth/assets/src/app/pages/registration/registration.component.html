@@ -1,1 +1,29 @@
-<p>registration works!</p>
+<form class="registrationForm" [formGroup]="registrationForm">
+  <mat-form-field>
+    <input matInput [formControl]="emailControl" placeholder="Email">
+    <mat-error *ngIf="emailControl.invalid && emailControl.hasError('required')">
+      You must enter a value
+    </mat-error>
+    <mat-error *ngIf="emailControl.invalid && emailControl.hasError('email')">
+      Not a valid email
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [formControl]="passwordControl" placeholder="Password">
+    <mat-error *ngIf="passwordControl.invalid && passwordControl.hasError('required')">
+      You must enter a value
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [formControl]="passwordConfirmationControl" placeholder="Password">
+    <mat-error *ngIf="passwordConfirmationControl.invalid && passwordConfirmationControl.hasError('required')">
+      You must enter a value
+    </mat-error>
+    <mat-error *ngIf="passwordConfirmationControl.invalid && passwordConfirmationControl.hasError('notEqual')">
+      Password confirmation must be equal to password
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-button [disabled]="registrationForm.invalid">Submit</button>
+</form>
+
