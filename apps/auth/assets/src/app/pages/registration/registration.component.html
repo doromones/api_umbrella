@@ -15,7 +15,7 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput [formControl]="passwordConfirmationControl" placeholder="Password">
+    <input matInput [formControl]="passwordConfirmationControl" placeholder="Password confirmation">
     <mat-error *ngIf="passwordConfirmationControl.invalid && passwordConfirmationControl.hasError('required')">
       You must enter a value
     </mat-error>

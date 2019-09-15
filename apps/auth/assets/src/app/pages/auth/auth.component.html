@@ -1,16 +1,21 @@
-<nav mat-tab-nav-bar>
-  <a mat-tab-link
-     routerLink="login"
-     routerLinkActive #routerLinkLogin="routerLinkActive"
-     [active]="routerLinkLogin.isActive">
-    Login
-  </a>
-  <a mat-tab-link
-     routerLink="registration"
-     routerLinkActive #routerLinkRegistration="routerLinkActive"
-     [active]="routerLinkRegistration.isActive">
-    Registration
-  </a>
-</nav>
-
-<router-outlet></router-outlet>
+<mat-card class="card">
+  <mat-card-content>
+    <nav mat-tab-nav-bar mat-stretch-tabs>
+      <a mat-tab-link
+         routerLink="login"
+         routerLinkActive #routerLinkLogin="routerLinkActive"
+         [active]="routerLinkLogin.isActive">
+        Login
+      </a>
+      <a mat-tab-link
+         routerLink="registration"
+         routerLinkActive #routerLinkRegistration="routerLinkActive"
+         [active]="routerLinkRegistration.isActive">
+        Registration
+      </a>
+    </nav>
+    <div class="router-outlet-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-card-content>
+</mat-card>

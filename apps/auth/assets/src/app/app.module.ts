@@ -17,6 +17,7 @@ import {MatButtonModule} from "@angular/material/button";
 import { AuthComponent } from './pages/auth/auth.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import { RegistrationComponent } from './pages/registration/registration.component';
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { RegistrationComponent } from './pages/registration/registration.compone
     ReactiveFormsModule,
     MatGridListModule,
     MatButtonModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

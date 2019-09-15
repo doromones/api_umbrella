@@ -15,6 +15,6 @@
     </mat-error>
   </mat-form-field>
 
-  <button mat-button>Submit</button>
+  <button mat-button [disabled]="loginForm.invalid">Submit</button>
 </form>
 
