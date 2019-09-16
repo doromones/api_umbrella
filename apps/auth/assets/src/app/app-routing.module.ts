@@ -7,7 +7,7 @@ import {RegistrationComponent} from "./pages/registration/registration.component
 
 const routes: Routes = [
   {
-    path: 'auth',
+    path: '',
     component: AuthComponent,
     data: {title: 'Auth'},
     children: [
@@ -25,11 +25,6 @@ const routes: Routes = [
         component: RegistrationComponent
       }
     ]
-  },
-  {
-    path: '',
-    redirectTo: '/auth/login',
-    pathMatch: 'full'
   }
 ];
 
