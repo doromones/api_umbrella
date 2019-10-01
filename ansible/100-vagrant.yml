@@ -1,0 +1,11 @@
+---
+- name: Setup vagrant
+  hosts: applications
+
+  become: true
+  become_user: root
+  become_method: sudo
+
+  roles:
+    - erlang
+    - elixir
