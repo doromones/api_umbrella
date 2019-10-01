@@ -1,6 +1,6 @@
 ---
 - name: Install Elixir
   apt:
-    name: "{{elixir_package}}"
+    name: "elixir={{elixir_version}}-*"
     state: present
     update_cache: yes

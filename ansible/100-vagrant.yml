@@ -7,12 +7,13 @@
   become_method: sudo
 
   vars:
-    elixir_package: "elixir=1.9.1-1"
-    erlang_package: "esl-erlang=1:22.1-1"
-    nodejs_version: "11.x"
-    nodejs_package: "nodejs=11.15.0-1nodesource1"
+    elixir_version: "1.9.1"
+    erlang_version: "22"
+    nodejs_version: "11"
+    postgresql_version: "11"
 
   roles:
     - erlang
     - elixir
     - nodejs
+    - postgresql

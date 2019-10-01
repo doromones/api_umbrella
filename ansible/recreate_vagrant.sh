@@ -6,8 +6,8 @@ vagrant destroy --force
 vagrant up
 
 echo "\n***********"
-echo "Sleep 5 seconds"
-echo "\n***********"
-sleep 5
+echo "Sleep 30 seconds"
+echo "***********\n"
+sleep 30
 
 ansible-playbook 100-vagrant.yml -i inventory/vagrant.yml

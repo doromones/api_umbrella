@@ -5,6 +5,6 @@
 
 - name: Install Erlang
   apt:
-    name: "{{erlang_package}}"
+    name: "esl-erlang=1:{{erlang_version}}.*"
     state: present
     update_cache: yes
