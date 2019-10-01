@@ -1,0 +1,6 @@
+---
+- name: Install Elixir
+  apt:
+    name: "elixir=1.9.1-1"
+    state: present
+    update_cache: yes

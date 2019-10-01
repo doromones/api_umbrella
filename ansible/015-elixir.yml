@@ -1,0 +1,5 @@
+---
+- name: Install Elixir play
+  hosts: application
+  roles:
+    - elixir
