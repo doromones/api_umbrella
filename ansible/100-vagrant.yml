@@ -9,17 +9,10 @@
   vars:
     elixir_package: "elixir=1.9.1-1"
     erlang_package: "esl-erlang=1:22.1-1"
+    nodejs_version: "11.x"
+    nodejs_package: "nodejs=11.15.0-1nodesource1"
 
-  pre_tasks:
-    - name: Wait for ssh to be up
-      become: false
-      wait_for:
-        port: 22
-        delay: 5
-        connect_timeout: 5
-        timeout: 360
-        host: "{{ ansible_host }}"
-      delegate_to: localhost
   roles:
     - erlang
     - elixir
+    - nodejs
