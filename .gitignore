@@ -34,3 +34,4 @@ config/*.local.exs
 __snapshots__/
 node_modules/
 coverage/
+/releases
