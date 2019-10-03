@@ -14,6 +14,8 @@ import_config "core/config.exs"
 import_config "core_web/config.exs"
 import_config "auth/config.exs"
 
+#config :bootleg, verbosity: :debug
+
 config :ueberauth, Ueberauth,
        providers: [
          facebook: {Ueberauth.Strategy.Facebook, []}

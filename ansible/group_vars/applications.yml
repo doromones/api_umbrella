@@ -1,0 +1,5 @@
+---
+SECRET_KEY_BASE: qweqwe
+environment_config:
+  SECRET_KEY_BASE: asdasd
+  DATABASE_URL: asdasd
