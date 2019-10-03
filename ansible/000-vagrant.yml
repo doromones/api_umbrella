@@ -17,6 +17,7 @@
       apt:
         name:
           - git
+          - mc
   roles:
     - weareinteractive.environment
     - erlang
