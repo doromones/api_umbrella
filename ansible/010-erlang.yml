@@ -1,5 +1,0 @@
----
-- name: Install Erlang play
-  hosts: application
-  roles:
-    - erlang
