@@ -9,6 +9,13 @@
 # move said applications out of the umbrella.
 use Mix.Config
 
+import_config "api_web/config.exs"
+import_config "core/config.exs"
+import_config "core_web/config.exs"
+import_config "auth/config.exs"
+
+#config :bootleg, verbosity: :debug
+
 config :ueberauth, Ueberauth,
        providers: [
          facebook: {Ueberauth.Strategy.Facebook, []}
@@ -18,35 +25,6 @@ config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
        client_id: System.get_env("FACEBOOK_CLIENT_ID"),
        client_secret: System.get_env("FACEBOOK_CLIENT_SECRET")
 
-config :api_web,
-  ecto_repos: [Core.Repo],
-  generators: [context_app: :core]
-
-# Configures the endpoint
-config :api_web, ApiWeb.Endpoint,
-  url: [host: "localhost"],
-  secret_key_base: "vjlv1WS6LKbgo63hNg7pLa97tRhFou6RWt98q6p8W6RFDm1uMzOQj4NyVRLMszuY",
-  render_errors: [view: ApiWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: ApiWeb.PubSub, adapter: Phoenix.PubSub.PG2]
-
-config :api_web, ApiWeb.Guardian,
-       issuer: :api_web,
-       secret_key: "Sb0zJMY8lxOD299doNrSMplgr9sFMSV8ca5davfIGjl4FYleaNzFawoEuykFNkKT"
-
-# Configure Mix tasks and generators
-config :core,
-  ecto_repos: [Core.Repo]
-
-config :core_web,
-  ecto_repos: [Core.Repo],
-  generators: [context_app: :core]
-
-# Configures the endpoint
-config :core_web, CoreWeb.Endpoint,
-  url: [host: "localhost"],
-  secret_key_base: "/YcyOBLUKdVoQOBxKMG5rMPU89E27RzvsSEIx20VQ62GjE/r2iEWvqFyMbhy43tZ",
-  render_errors: [view: CoreWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: CoreWeb.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -60,6 +38,6 @@ config :phoenix, :json_library, Jason
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
 
-if File.regular?("config/#{Mix.env()}.local.exs") do
+if File.regular?("#{Path.dirname(__ENV__.file)}/#{Mix.env()}.local.exs") do
   import_config("#{Mix.env()}.local.exs")
 end

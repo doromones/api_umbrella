@@ -1,0 +1,35 @@
+---
+- name: Install packages for mkcert
+  apt:
+    name:
+      - libnss3-tools
+#      - golang
+    state: latest
+    update_cache: yes
+
+- name: Install mkcert
+  shell: |
+    wget -O mkcert https://github.com/FiloSottile/mkcert/releases/download/v1.4.0/mkcert-v1.4.0-linux-amd64
+    chmod +x mkcert
+    mv mkcert /usr/local/bin
+  args:
+    creates: /usr/local/bin/mkcert
+
+- name: Initialize mkcert
+  command: mkcert -install
+  args:
+    creates: /root/.local/share/mkcert
+
+- name: ensures /etc/nginx/certs/ dir exists
+  file:
+    path: "/etc/nginx/certs/"
+    state: directory
+    group: root
+    owner: root
+
+- name: Create domain cert
+  command: mkcert '{{item}}'
+  with_items: "{{ nginx_hosts }}"
+  args:
+    chdir: /etc/nginx/certs/
+    creates: "{{item}}-key.pem"

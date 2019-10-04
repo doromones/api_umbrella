@@ -31,13 +31,13 @@ environment :dev do
   # dev mode.
   set dev_mode: true
   set include_erts: false
-  set cookie: :"wRdB*Mc6x/;h3lr7yuoGQh{*YezzSm]kl3=No:Z}F]i^?CFC>%ckO/^aM9H.*QH8"
+  set cookie: :"|g{J_v?p0%}]nWDguXK[wTp`LN;*Ys~P>u<%:~hFG6YgShRgg3=cqvadtq7]M4w*"
 end
 
 environment :prod do
   set include_erts: true
   set include_src: false
-  set cookie: :";Wc;[O~@g*F|6/i1WKe{BzF5)FM;u}Kwzhzsd0]Ekok~`We!N9_3vKT@lLg|~8I6"
+  set cookie: :";X<;%?N/]nW_;}rB1EwzC{Lcv^C9*>b=k{%YTd`fwD`.[_P*p%yr[*M9FK.M2KXC"
   set vm_args: "rel/vm.args"
 end
 
@@ -51,8 +51,17 @@ release :api_umbrella do
   set applications: [
     :runtime_tools,
     api_web: :permanent,
+    auth: :permanent,
     core: :permanent,
     core_web: :permanent
   ]
+end
+
+release :auth do
+  set version: "0.1.0"
+  set applications: [
+        :runtime_tools,
+        auth: :permanent
+      ]
 end
 

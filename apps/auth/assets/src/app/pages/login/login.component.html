@@ -1,0 +1,20 @@
+<form class="loginForm" [formGroup]="loginForm">
+  <mat-form-field>
+    <input matInput [formControl]="emailControl" placeholder="Email">
+    <mat-error *ngIf="emailControl.invalid && emailControl.hasError('required')">
+      You must enter a value
+    </mat-error>
+    <mat-error *ngIf="emailControl.invalid && emailControl.hasError('email')">
+      Not a valid email
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [formControl]="passwordControl" placeholder="Password">
+    <mat-error *ngIf="passwordControl.invalid && passwordControl.hasError('required')">
+      You must enter a value
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-button [disabled]="loginForm.invalid">Submit</button>
+</form>
+

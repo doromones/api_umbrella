@@ -1,0 +1,50 @@
+---
+- name: add apt-key
+  apt_key:
+    url: "http://nginx.org/keys/nginx_signing.key"
+
+- name: add repository
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  with_items:
+    - "deb http://nginx.org/packages/mainline/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} nginx"
+    - "deb-src http://nginx.org/packages/mainline/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} nginx"
+
+- name: Install nginx
+  apt:
+    name: nginx
+    state: latest
+    update_cache: yes
+
+- name: ensures /home/srv/logs/nginx/ dir exists
+  file:
+    path: "/var/log/nginx/"
+    state: directory
+    group: www-data
+    owner: www-data
+
+- name: ensures /etc/nginx/sites-enabled/ dir exists
+  file:
+    path: "/etc/nginx/sites-enabled/"
+    state: directory
+    group: root
+    owner: root
+
+- name: copy nginx.conf
+  copy:
+    src: "nginx.conf"
+    dest: /etc/nginx/nginx.conf
+  notify: restart nginx
+
+- name: write nginx webservers config files
+  copy:
+    src: "sites-enabled/{{ item }}.nginx"
+    dest: "/etc/nginx/sites-enabled/{{ item }}.conf"
+  notify: restart nginx
+  with_items: "{{ nginx_hosts }}"
+
+- name: ensure nginx is running
+  service:
+    name: nginx
+    state: started
