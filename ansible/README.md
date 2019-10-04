@@ -2,6 +2,7 @@
 
 ```bash
 ansible-galaxy install weareinteractive.environment
+ansible-galaxy install geerlingguy.certbot
 ```
 
 setup ansible to vagrant

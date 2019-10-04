@@ -11,16 +11,22 @@
     erlang_version: "22"
     nodejs_version: "11"
     postgresql_version: "11"
-
+    nginx_hosts:
+      - auth.server.dev
   pre_tasks:
     - name: install packages
       apt:
         name:
           - git
           - mc
+          - mlocate
+          - curl
+          - vim
   roles:
     - weareinteractive.environment
     - erlang
     - elixir
     - nodejs
     - postgresql
+    - mkcert
+    - nginx
