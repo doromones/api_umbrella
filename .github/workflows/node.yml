@@ -38,7 +38,7 @@ jobs:
       - name: Install Node Modules
         run: |
           cd ./apps/core_web/assets/
-          yarn
+          yarn install
 
       - name: Run Lint
         run: |
