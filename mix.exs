@@ -6,6 +6,7 @@ defmodule App.Umbrella.MixProject do
       apps_path: "apps",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      aliases: aliases(),
       preferred_cli_env: [
         coveralls: :test,
         "coveralls.detail": :test,
@@ -41,5 +42,20 @@ defmodule App.Umbrella.MixProject do
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:distillery, "~> 2.1"}
     ]
+  end
+
+  defp aliases do
+    [
+      "app.setup.yarn": [&yarn_install/1],
+      "app.setup": ["deps.get", "app.setup.yarn"]
+    ]
+  end
+
+  defp yarn_install(_) do
+    web_apps = ["core_web"]
+
+    for app <- web_apps do
+      Mix.shell.cmd("cd apps/#{app}/assets && yarn install")
+    end
   end
 end
